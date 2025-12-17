@@ -1,0 +1,50 @@
+﻿// See https://aka.ms/new-console-template for more information
+using System.Reflection.Metadata.Ecma335;
+
+Console.WriteLine("Oto mój kalkulkator");
+
+double liczbaa;
+double liczbab;
+string znak;
+bool test1, test2;
+Console.WriteLine("Podaj pierwszą liczbę");
+test1 = double.TryParse(Console.ReadLine(), out liczbaa);
+Console.WriteLine("Podaj drugą liczbę");
+test2 = double.TryParse(Console.ReadLine(), out liczbab);
+
+if (!test1 || !test2)
+{
+    Console.Write("Obie muszą byc liczbami");
+}
+else
+{
+    Console.WriteLine("Prosze podaj znak");
+    znak = Console.ReadLine();
+
+    if (znak == "+")
+    {
+        Console.WriteLine("Oto wynik działania: " + (liczbaa + liczbab));
+    }
+
+    if (znak == "-")
+    {
+        Console.WriteLine("Oto wynik działania: " + (liczbaa - liczbab));
+    }
+
+    if (znak == "/" && liczbaa != 0 && liczbab != 0)
+    {
+        Console.WriteLine("Oto wynik działania: " + (liczbaa / liczbab));
+    }
+    else
+    {
+        Console.WriteLine("liczby nie mogą wynosić zero");
+    }
+
+    if (znak == "*")
+    {
+        Console.WriteLine("Oto wynik działania: " + (liczbaa * liczbab));
+    }
+
+}
+
+
