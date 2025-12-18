@@ -12,39 +12,82 @@ test1 = double.TryParse(Console.ReadLine(), out liczbaa);
 Console.WriteLine("Podaj drugą liczbę");
 test2 = double.TryParse(Console.ReadLine(), out liczbab);
 
-if (!test1 || !test2)
+    Console.WriteLine("Podaj znak działania (+, -, *, /)");
+    znak = Console.ReadLine();
+if (znak == "+" || znak == "-" || znak == "*" || znak == "/")
 {
-    Console.Write("Obie muszą byc liczbami");
+    switch (znak)
+    {
+        case "+":
+            {
+                Console.WriteLine("Wynik: " + (liczbaa + liczbab));
+                break;
+            }
+        case "-":
+            {
+                Console.WriteLine("Wynik: " + (liczbaa - liczbab));
+                break;
+            }
+        case "*":
+            {
+                Console.WriteLine("Wynik: " + (liczbaa * liczbab));
+                break;
+            }
+            ;
+        case "/":
+            {
+                if (liczbab != 0)
+                {
+                    Console.WriteLine("Wynik: " + (liczbaa / liczbab));
+                }
+                else
+                {
+                    Console.WriteLine("Nie można dzielić przez zero");
+                }
+                break;
+            }
+            ;
+    }
 }
 else
 {
-    Console.WriteLine("Prosze podaj znak");
-    znak = Console.ReadLine();
-
-    if (znak == "+")
-    {
-        Console.WriteLine("Oto wynik działania: " + (liczbaa + liczbab));
-    }
-
-    if (znak == "-")
-    {
-        Console.WriteLine("Oto wynik działania: " + (liczbaa - liczbab));
-    }
-
-    if (znak == "/" && liczbaa != 0 && liczbab != 0)
-    {
-        Console.WriteLine("Oto wynik działania: " + (liczbaa / liczbab));
-    }
-    else
-    {
-        Console.WriteLine("liczby nie mogą wynosić zero");
-    }
-
-    if (znak == "*")
-    {
-        Console.WriteLine("Oto wynik działania: " + (liczbaa * liczbab));
-    }
-
+    Console.WriteLine("Nieprawidłowy znak");
 }
+
+
+//if (!test1 || !test2)
+//{
+//    Console.Write("Obie muszą byc liczbami");
+//}
+//else
+//{
+//    Console.WriteLine("Prosze podaj znak");
+//    znak = Console.ReadLine();
+
+//    if (znak == "+")
+//    {
+//        Console.WriteLine("Oto wynik działania: " + (liczbaa + liczbab));
+//    }
+
+//    if (znak == "-")
+//    {
+//        Console.WriteLine("Oto wynik działania: " + (liczbaa - liczbab));
+//    }
+
+//    if (znak == "/" && liczbaa != 0 && liczbab != 0)
+//    {
+//        Console.WriteLine("Oto wynik działania: " + (liczbaa / liczbab));
+//    }
+//    else
+//    {
+//        Console.WriteLine("liczby nie mogą wynosić zero");
+//    }
+
+//    if (znak == "*")
+//    {
+//        Console.WriteLine("Oto wynik działania: " + (liczbaa * liczbab));
+//    }
+
+//}
 
 
