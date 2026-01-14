@@ -1,98 +1,86 @@
 ﻿using System;
+using System.ComponentModel.Design;
+using static System.Net.Mime.MediaTypeNames;
 
 class Program
 {
     static void Main(string[] args)
     {
-        Console.WriteLine("Oto mój kalkulkator");
-
-        double liczbaa;
-        double liczbab;
-        string znak;
-        bool test1, test2;
-
-        Console.WriteLine("Podaj pierwszą liczbę");
-        test1 = double.TryParse(Console.ReadLine(), out liczbaa);
-        while (!test1)
+        string wybor;
+        do
         {
-            Console.WriteLine("Podaj poprawną pierwszą liczbę");
-            test1 = double.TryParse(Console.ReadLine(), out liczbaa);
-        }
+            Console.WriteLine("\n== Kalkulator ==");
 
-        Console.WriteLine("Podaj drugą liczbę");
-        test2 = double.TryParse(Console.ReadLine(), out liczbab);
-        while (!test2)
-        {
-            Console.WriteLine("Podaj poprawną drugą liczbę");
-            test2 = double.TryParse(Console.ReadLine(), out liczbab);
-        }
+            double liczbaA = ReadDouble("Podaj pierwszą liczbę:");
+            double liczbaB = ReadDouble("Podaj drugą liczbę:");
+            char znak = ReadOperator("Podaj znak działania (+, -, *, /):");
 
-        Console.WriteLine("Podaj znak działania (+, -, *, /)");
-        znak = Console.ReadLine();
 
-        while (znak != "+" && znak != "-" && znak != "*" && znak != "/")
-        {
-            Console.WriteLine("Podaj prawidłowy znak działania (+, -, *, /)");
-            znak = Console.ReadLine();
-        }
+            double wynik = 0;
 
-        Obliczenia(liczbaa, liczbab, znak);
+            bool DzieleniePrzezZero = Obliczenia(liczbaA, liczbaB, znak, out wynik);
+            if (DzieleniePrzezZero)
+            {
+                Console.WriteLine("Wynik: " + wynik);
+            }
+            else
+            {
+                Console.WriteLine("Nie można dzielić przez zero");
+            }
+            Console.WriteLine("\nCzy chcesz liczyć dalej? (t/n)");
+            wybor = Console.ReadLine();
+        } while (wybor == "t");
     }
-    private static void Obliczenia(double liczbaa, double liczbab, string znak) {
+
+    static char ReadOperator(string prompt)
+    {
+        while (true)
+        {
+            Console.WriteLine(prompt);
+            string result = Console.ReadLine() ?? "";
+            if (result == "+" || result == "-" || result == "*" || result == "/")
+            return char.Parse(result);
+        
+            else
+            {
+                Console.WriteLine("Zły znak");
+
+            }
+        }
+    }
+static double ReadDouble(string prompt)
+    {
+        double result;
+        Console.WriteLine(prompt);
+        while (!double.TryParse(Console.ReadLine(), out result))
+        {
+            Console.WriteLine("Podaj poprawną liczbę:");
+        }
+        return result;
+    }
+    static bool Obliczenia(double liczbaA, double liczbaB, char znak, out double wynik)
+    {
+        wynik = 0;
         switch (znak)
         {
-            case "+":
-                    Console.WriteLine("Wynik: " + (liczbaa + liczbab));
-                    break;
-            case "-":
-                    Console.WriteLine("Wynik: " + (liczbaa - liczbab));
-                    break;
-            case "*":
-                    Console.WriteLine("Wynik: " + (liczbaa * liczbab));
-                    break;
-            case "/":
-                    if (liczbab != 0)
-                        Console.WriteLine("Wynik: " + (liczbaa / liczbab));
-                    else
-                        Console.WriteLine("Nie można dzielić przez zero");
-                    break;
-        } 
+            case '+':
+                wynik = liczbaA + liczbaB;
+                return true;
+            case '-':
+                wynik = liczbaA - liczbaB;
+                return true;
+            case '*':
+                wynik = liczbaA * liczbaB;
+                return true;
+            case '/':
+                if (liczbaB != 0)
+                {
+                    wynik = liczbaA / liczbaB;
+                    return true;
+                }
+                return false;
+            default:
+                return false;
+        }
     }
 }
-
-//if (!test1 || !test2) S
-//{
-//    Console.Write("Obie muszą byc liczbami");
-//}
-//else
-//{
-//    Console.WriteLine("Prosze podaj znak");
-//    znak = Console.ReadLine();
-
-//    if (znak == "+")
-//    {
-//        Console.WriteLine("Oto wynik działania: " + (liczbaa + liczbab));
-//    }
-
-//    if (znak == "-")
-//    {
-//        Console.WriteLine("Oto wynik działania: " + (liczbaa - liczbab));
-//    }
-
-//    if (znak == "/" && liczbaa != 0 && liczbab != 0)
-//    {
-//        Console.WriteLine("Oto wynik działania: " + (liczbaa / liczbab));
-//    }
-//    else
-//    {
-//        Console.WriteLine("liczby nie mogą wynosić zero");
-//    }
-
-//    if (znak == "*")
-//    {
-//        Console.WriteLine("Oto wynik działania: " + (liczbaa * liczbab));
-//    }
-
-//}
-
-
